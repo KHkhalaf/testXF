@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:testXF.Views"
+             Title="ShellLogin"
+             x:Class="testXF.Views.AppShell"
+             Shell.BackgroundColor="{StaticResource PrimaryColor}"
+             Shell.NavBarHasShadow="True">
+
+    <!-- Styles and Resources -->
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle"
+                   TargetType="Element">
+                <Setter Property="Shell.BackgroundColor"
+                        Value="{StaticResource PrimaryColor}" />
+                <Setter Property="Shell.ForegroundColor"
+                        Value="White" />
+                <Setter Property="Shell.TitleColor"
+                        Value="White" />
+                <Setter Property="Shell.DisabledColor"
+                        Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor"
+                        Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor"
+                        Value="{StaticResource PrimaryColor}" />
+                <Setter Property="Shell.TabBarForegroundColor"
+                        Value="White" />
+                <Setter Property="Shell.TabBarUnselectedColor"
+                        Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarTitleColor"
+                        Value="White" />
+            </Style>
+            <Style TargetType="TabBar"
+                   BasedOn="{StaticResource BaseStyle}" />
+            <Style x:Key="ItemStyle" TargetType="StackLayout">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <ContentView BackgroundColor="{StaticResource PrimaryColor}" HeightRequest="200">
+                <Image Source="twitter.png" Margin="10" 
+                    HorizontalOptions="Center" VerticalOptions="Center"/>
+            </ContentView>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <StackLayout Orientation="Horizontal" Padding="15" Style="{StaticResource ItemStyle}">
+                <Label Text="{Binding Title}" TextColor="#686868"  Padding="65,0,0,0" FontSize="16" VerticalOptions="Center"/>
+            </StackLayout>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+    
+    <FlyoutItem Title="Movies" Route="main">
+        <Tab Title="Movies" Route="home">
+            <ShellContent Route="movies" ContentTemplate="{DataTemplate local:Movies}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Profile">
+        <Tab Title="Profile">
+            <ShellContent ContentTemplate="{DataTemplate local:Profile}"/>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="About Us">
+        <Tab Title="About Us">
+            <ShellContent ContentTemplate="{DataTemplate local:AboutUs}"/>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Logout">
+        <Tab Title="Logout">
+            <ShellContent ContentTemplate="{DataTemplate local:Login}"/>
+        </Tab>
+    </FlyoutItem>
+    
+</Shell>

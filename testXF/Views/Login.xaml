@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:testXF.Views"
+             mc:Ignorable="d"
+             x:Class="testXF.Views.Login"
+             xmlns:vm="clr-namespace:testXF.ViewModels"
+             Shell.NavBarIsVisible="True"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.TabBarIsVisible="False"
+             Shell.PresentationMode="ModalAnimated"
+             Title="Login">
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel/>
+    </ContentPage.BindingContext>
+    <StackLayout>
+        <StackLayout Orientation="Vertical"
+                     VerticalOptions="CenterAndExpand"
+                     WidthRequest="400" 
+                     HorizontalOptions="Center">
+            
+            <controls:EntryLabelFloatingView x:Name="Name"
+                                             lblTextTitle="Name" 
+                                             EntryText="{Binding user.Name, Mode=OneWayToSource}"
+                                             EntryImage="login"
+                                             HorizontalOptions="Center" 
+                                             Margin="20,5,20,10" />
+            
+            <controls:EntryLabelFloatingView x:Name="Passoword"
+                                             lblTextTitle="Passoword"
+                                             EntryImage="lock"
+                                             EntryText="{Binding user.Password, Mode=OneWayToSource}"
+                                             ImagePassowordSource="visible"
+                                             EntryIsPassword="True" 
+                                             HorizontalOptions="Center" 
+                                             Margin="20,10,20,10"/>
+
+            <controls:EntryLabelFloatingView x:Name="Email"
+                                             lblTextTitle="Email"
+                                             EntryText="{Binding user.Email, Mode=OneWayToSource}"
+                                             HorizontalOptions="Center" 
+                                             Margin="20,10,20,10" />
+
+            <Button Text="Add"
+                    CornerRadius="15"
+                    HeightRequest="60" 
+                    BackgroundColor="{StaticResource PrimaryColor}" 
+                    TextColor="White" 
+                    Margin="20,10,20,5" 
+                    Command="{Binding LoginCommand}">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button"
+                                 Binding="{Binding Source={x:Reference Name,Passoword,Email},Path=EntryText.Length}" Value="0">
+                        <Setter Property="IsEnabled" Value="False" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

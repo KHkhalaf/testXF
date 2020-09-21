@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="testXF.Views.DetailsMovie">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+            </Grid.RowDefinitions>
+            <MediaElement x:Name="videoElement"
+                          Grid.Row="0"
+                          ShowsPlaybackControls="True" 
+                          HeightRequest="300"/>
+
+            <Grid Grid.Row="1" Padding="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="60*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="0" Source="{Binding poster_path}"/>
+                <StackLayout Grid.Column="1" Padding="10">
+                    <Label x:Name="titleAr" Text="{Binding title}" FontSize="Title"/>
+                    <Label x:Name="titleEn" Text="{Binding original_title}"/>
+                    <Label x:Name="descAr" Text="{Binding vote_count}"/>
+                    <Label x:Name="descEn" Text="{Binding release_date}" FontAttributes="Bold"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
